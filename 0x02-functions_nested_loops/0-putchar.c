@@ -11,4 +11,4 @@ int main(void)
 		n++;
 	}
 	_putchar('\n');
-	return (0)i;
+	return (0);

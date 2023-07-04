@@ -1,25 +1,21 @@
 #include "lists.h"
+
 /**
- * print_listint - print all the elements of a linked list
- * @h: pointer to a struct
+ * print_listint - prints all the elements of a linked list
+ * @h: linked list of type listint_t to print
  *
- * Description: return the required result
- *
- * Return: return integer value
+ * Return: number of nodes
  */
 size_t print_listint(const listint_t *h)
 {
-	const listint_t *dir = NULL;
-	size_t count = 0;
+	size_t num = 0;
 
-	dir = h;
-	if (dir == NULL)
-		return (0);
-	while (dir != NULL)
+	while (h)
 	{
-		printf("%d\n", dir->n);
-		count++;
-		dir = dir->next;
+		printf("%d\n", h->n);
+		num++;
+		h = h->next;
 	}
-	return (count);
+
+	return (num);
 }

@@ -1,75 +1,134 @@
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+/**
+ * _memset - fills memory with a constant byte
+ *
+ * @s: input pointer that represents memory block
+ *     to fill
+ * @b: characters to fill/set
+ * @n: number of bytes to be filled
+ *
+ * Return: pointer to the filled memory area
+*/
+
+char *_memset(char *s, char b, unsigned int n)
+{
+	unsigned int i = 0;
+
+	while (i < n)
+	{
+		s[i] = b;
+		i++;
+	}
+	return (s);
+}
+
+/**
+ * _calloc - function that allocates memory
+ *           for an array using memset
+ *
+ * @nmemb: size of array
+ * @size: size of each element
+ *
+ * Return: pointer to new allocated memory
+*/
+
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	char *ptr;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+	_memset(ptr, 0, nmemb * size);
+
+	return (ptr);
+}
+
+
+/**
+ * multiply - initialize array with 0 byte
+ *
+ * @s1: string 1
+ * @s2: string 2
+ *
+ * Return: nothing
+*/
+
+void mul(char *s1, char *s2)
+{
+	int i, l1, l2, total_l, f_digit, s_digit, res = 0, tmp;
+	char *ptr;
+	void *temp;
+
+	l1 = _length(s1);
+	l2 = _length(s2);
+	tmp = l2;
+	total_l = l1 + l2;
+	ptr = _calloc(sizeof(int), total_l);
+
+	/* store our pointer address to free later */
+	temp = ptr;
+
+	for (l1--; l1 >= 0; l1--)
+	{
+		f_digit = s1[l1] - '0';
+		res = 0;
+		l2 = tmp;
+		for (l2--; l2 >= 0; l2--)
+		{
+			s_digit = s2[l2] - '0';
+			res += ptr[l2 + l1 + 1] + (f_digit * s_digit);
+			ptr[l1 + l2 + 1] = res % 10;
+			res /= 10;
+		}
+		if (res)
+			ptr[l1 + l2 + 1] = res % 10;
+	}
+
+	while (*ptr == 0)
+	{
+		ptr++;
+		total_l--;
+	}
+
+	for (i = 0; i < total_l; i++)
+		printf("%i", ptr[i]);
+	printf("\n");
+	free(temp);
+}
+
+
+/**
+ * main - Entry point
+ *
+ * Description: a program that multiplies
+ *            two positive numbers
+ *
+ * @argc: number of arguments
+ * @argv: arguments array
+ *
+ * Return: 0 on success 98 on faliure
+*/
 
 int main(int argc, char *argv[])
 {
-    if (argc != 3) {
-        printf("Error\n");
-        return 98;
-    }
+	char *num1 = argv[1];
+	char *num2 = argv[2];
 
-    char *num1 = argv[1];
-    char *num2 = argv[2];
+	if (argc != 3 || check_number(num1) || check_number(num2))
+		error_exit();
 
-    for (int i = 0; num1[i] != '\0'; i++) {
-        if (num1[i] < '0' || num1[i] > '9') {
-            printf("Error\n");
-            return 98;
-        }
-    }
-
-    for (int i = 0; num2[i] != '\0'; i++) {
-        if (num2[i] < '0' || num2[i] > '9') {
-            printf("Error\n");
-            return 98;
-        }
-    }
-
-    int len1 = 0;
-    while (num1[len1] != '\0') {
-        len1++;
-    }
-
-    int len2 = 0;
-    while (num2[len2] != '\0') {
-        len2++;
-    }
-
-    if (len1 == 0 || len2 == 0) {
-        printf("Error\n");
-        return 98;
-    }
-
-    int totalLen = len1 + len2;
-    int *result = (int *)calloc(totalLen, sizeof(int));
-
-    for (int i = len1 - 1; i >= 0; i--) {
-        int carry = 0;
-        int n1 = num1[i] - '0';
-        for (int j = len2 - 1; j >= 0; j--) {
-            int n2 = num2[j] - '0';
-            int sum = n1 * n2 + result[i + j + 1] + carry;
-            carry = sum / 10;
-            result[i + j + 1] = sum % 10;
-        }
-        result[i] += carry;
-    }
-
-    int start = 0;
-    while (start < totalLen && result[start] == 0) {
-        start++;
-    }
-
-    if (start == totalLen) {
-        printf("0\n");
-    } else {
-        for (int i = start; i < totalLen; i++) {
-            printf("%d", result[i]);
-        }
-        printf("\n");
-    }
-
-    free(result);
-
-    return 0;
+	if (*num1 == '0' || *num2 == '0')
+	{
+		_putchar('0');
+		_putchar('\n');
+	}
+	else
+		mul(num1, num2);
+	return (0);
 }

@@ -3,7 +3,7 @@
 #include "lists.h"
 
 /**
- * add_node - Addition of a  new node at the beginning of a list_t list.
+ * add_node - Adds a new node at the beginning of a list_t list.
  * @head: Pointer to a pointer to the head of the list.
  * @str: String to be duplicated and added to the new node.
  *
@@ -21,20 +21,17 @@ list_t *add_node(list_t **head, const char *str)
         exit(EXIT_FAILURE);
     }
 
-    new_node->len = 0;
-    while (str[new_node->len] != '\0')
-        new_node->len++;
-
-    new_node->str = malloc((new_node->len + 1) * sizeof(char));
+    new_node->str = strdup(str);
     if (new_node->str == NULL)
     {
-        perror("malloc");
+        perror("strdup");
         free(new_node);
         exit(EXIT_FAILURE);
     }
 
-    for (size_t i = 0; i <= new_node->len; i++)
-        new_node->str[i] = str[i];
+    new_node->len = 0;
+    while (new_node->str[new_node->len] != '\0')
+        new_node->len++;
 
     new_node->next = *head;
     *head = new_node;

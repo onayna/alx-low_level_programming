@@ -2,10 +2,10 @@
 #include "lists.h" 
 
 /**
- _ list_len - Returns the number of elements in a linked list.
- _ @h: Pointer to the head of the linked list.
- _
- _ Return: the final value of count, which is the number of nodes in the linked list.
+ * list_len - Returns the number of elements in a linked list.
+ * @h: Pointer to the head of the linked list.
+ *
+ * Return: the final value of count, which is the number of nodes in the linked list.
  */
 size_t list_len(const list_t *h)
 {

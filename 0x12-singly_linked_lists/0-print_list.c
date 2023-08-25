@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include "lists.h"
 /**
- _ struct list_s - singly linked list
- _ @str: string - (malloc'ed string)
- _ @len: length of the string
- _ @next: points to the next node
- _
- _ Description: singly linked list node structure
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
+ * @len: length of the string
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
  */
 
 size_t print_list(const list_t *h) {

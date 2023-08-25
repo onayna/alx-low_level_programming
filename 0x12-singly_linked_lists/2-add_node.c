@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lists.h"
 
 /**
@@ -17,14 +18,14 @@ list_t *add_node(list_t **head, const char *str)
     list_t *new_node = malloc(sizeof(list_t));
     if (new_node == NULL)
     {
-        perror("malloc");
+        perror("Memory allocation failed");
         exit(EXIT_FAILURE);
     }
 
     new_node->str = strdup(str);
     if (new_node->str == NULL)
     {
-        perror("strdup");
+        perror("String duplication failed");
         free(new_node);
         exit(EXIT_FAILURE);
     }

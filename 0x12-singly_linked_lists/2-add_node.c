@@ -15,27 +15,27 @@ list_t *add_node(list_t **head, const char *str)
     if (str == NULL)
         return (NULL);
 
-    list_t *new_node = malloc(sizeof(list_t));
-    if (new_node == NULL)
+    list_t *new = malloc(sizeof(list_t));
+    if (new == NULL)
     {
         perror("Memory allocation failed");
         exit(EXIT_FAILURE);
     }
 
-    new_node->str = strdup(str);
-    if (new_node->str == NULL)
+    new->str = strdup(str);
+    if (new->str == NULL)
     {
         perror("String duplication failed");
-        free(new_node);
+        free(new);
         exit(EXIT_FAILURE);
     }
 
-    new_node->len = 0;
-    while (new_node->str[new_node->len] != '\0')
-        new_node->len++;
+    new->len = 0;
+    while (new->str[new->len] != '\0')
+        new->len++;
 
-    new_node->next = *head;
-    *head = new_node;
+    new->next = *head;
+    *head = new;
 
-    return (new_node);
+    return (new);
 }

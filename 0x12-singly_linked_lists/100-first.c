@@ -7,7 +7,7 @@
  *   This function is automatically executed before the main function starts,
  *   printing a poetic message.
  */
-void __attribute__((constructor)) bmain(void)
+void __attribute__((constructor)) bmain()
 {
     printf("You're beat! and yet, you must allow,\n");
     printf("I bear my dwelling upon my back!\n");

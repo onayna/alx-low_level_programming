@@ -1,14 +1,16 @@
 #include <stdio.h>
 
-/* my_constructor - Prints phrases before the main function is executed.
- * Return: Always 0 (Success).
- * */
- #include <stdio.h>
-
-void __attribute__((constructor)) my_constructor()
+/**
+ * bmain - Function executed before main.
+ *
+ * Summary:
+ *   This function is automatically executed before the main function starts,
+ *   printing a poetic message.
+ */
+void __attribute__((constructor)) bmain(void)
 {
     printf("You're beat! and yet, you must allow,\n");
-    printf("I bore my house upon my back!\n");
+    printf("I bear my dwelling upon my back!\n");
 }
 
 

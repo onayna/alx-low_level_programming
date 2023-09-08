@@ -14,14 +14,14 @@ int append_text_to_file(const char *filename, char *text_content)
 
     if (filename == NULL)
     {
-	    printf(STDERR_FILENO, "Error: NULL filename\n");
+	  
         return (-1);
     }
    
     fd = open(filename, O_WRONLY | O_APPEND);
     if (fd == -1)
     {
-	    printf(STDERR_FILENO, "Error: Could not open file %s\n", filename);
+	  
         return (-1);
     }
     if (text_content != NULL)
@@ -34,7 +34,6 @@ int append_text_to_file(const char *filename, char *text_content)
         write_status = write(fd, text_content, len);
         if (write_status == -1)
         {
-		printf(STDERR_FILENO, "Error: Write failed\n");
             close(fd);
             return (-1);
         }

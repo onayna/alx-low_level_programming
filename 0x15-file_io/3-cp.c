@@ -11,7 +11,7 @@
  */
 int main(int argc, char *argv[])
 {
-    int fd_from, fd_to, read_status, write_status;
+    int fd_from, fd_to, write_status;
     char buffer[BUFFER_SIZE];
     ssize_t bytes_read;
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         exit(97);
     }
 
-    // Open the source file for reading
+   
     fd_from = open(argv[1], O_RDONLY);
     if (fd_from == -1)
     {
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-    // Open the destination file for writing, or create if it doesn't exist
+   
     fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (fd_to == -1)
     {
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         exit(99);
     }
 
-    // Copy the content from source to destination
+   
     while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
     {
         write_status = write(fd_to, buffer, bytes_read);
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-    // Close the file descriptors
+   
     if (close(fd_from) == -1 || close(fd_to) == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't close fd\n");

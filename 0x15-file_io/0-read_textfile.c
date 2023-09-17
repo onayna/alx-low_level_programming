@@ -6,6 +6,7 @@
 
 /**
  * - Reads a text file and prints it to the POSIX standard output.
+ *
  * @filename: The name of the file to read.
  * @letters: The number of letters (characters) to read and print.
  *
